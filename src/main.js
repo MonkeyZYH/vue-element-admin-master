@@ -20,8 +20,16 @@ import './utils/error-log' // error log
 import * as filters from './filters' // global filters
 //导入封装信息确认提示框组件脚本
 import myconfirm from '@/utils/myconfirm'
-Vue.prototype.$myconfirm = myconfirm;
+//导入清空表单工具
+import resetForm from '@/utils/resetForm'
+//导入快速复制对象工具
+import objCopy from '@/utils/objCopy'
 
+Vue.prototype.$objCopy = objCopy;
+
+Vue.prototype.$resetForm = resetForm;
+
+Vue.prototype.$myconfirm = myconfirm;
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size

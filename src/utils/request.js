@@ -34,9 +34,9 @@ service.interceptors.response.use(
     //如果后端返回状态码不是200,则提示错误信息
     if (res.code !== 200) {
       Message({
-        message: res.message || 'Error',
+        message: res.msg || 'Error',
         type: 'error',
-        duration: 5 * 1000
+        duration: 2 * 1000
       })
 
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -51,7 +51,7 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject(new Error(res.message || 'Error'))
+      return Promise.reject(new Error(res.msg || 'Error'))
     } else {
       return res
     }
