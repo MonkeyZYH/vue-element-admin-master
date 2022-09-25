@@ -65,7 +65,7 @@
 
 <script>
 //导入role.js中的方法
-import {getRoles,addRole,updateRole,checkRole,deleteRole,getAssignTreeApi} from '@/api/role'
+import {getRoles,addRole,updateRole,checkRole,deleteRole,getAssignTreeApi,assignSave} from '@/api/role'
 //导入对话框组件
 import SystemDialog from '@/components/system/SystemDialog.vue';
 import leafUtils from '@/utils/leaf'
@@ -275,7 +275,29 @@ export default {
      * 分配权限窗口确认事件
      */
     async onAssignConfirm() {
-
+      //获取选中的节点key
+      let ids = this.$refs.assignTree.getCheckedKeys()
+      //获取选中节点的父节点id
+      let pids = this.$refs.assignTree.getHalfCheckedKeys()
+      //组装选中的节点ID数据
+      let listId = ids.concat(pids)
+      //组装参数
+      let params = {
+        roleId: this.roleId,
+        list: listId
+      }
+      //发送请求
+      let res = await assignSave(params)
+      //判断是否成功
+      if (res.success) {
+      //关闭窗口
+        this.assignDialog.visible = false
+      //提示成功
+        this.$message.success("分配权限成功")
+      } else {
+      //提示失败
+        this.$message.error("分配权限失败")
+      }
     },
 
     /**

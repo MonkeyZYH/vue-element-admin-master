@@ -42,3 +42,11 @@ export async function getAssignTreeApi(params){
   return await http.get("/role/getAssignMenuTree",params);
 }
 
+/**
+ * 分配权限
+ * @returns
+ */
+export async function assignSave(params){
+  return await http.post("/role/saveRoleAssign",params);
+}
+

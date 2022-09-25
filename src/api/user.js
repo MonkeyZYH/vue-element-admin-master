@@ -19,3 +19,12 @@ export async function logout() {
 export async function getMenuList(){
   return await http.get("/users/getMenuList");
 }
+
+/**
+ *  查询用户列表
+ */
+export default {
+  async getUserList(params){
+    return await http.get("/users/list",params)
+  }
+}
